@@ -9,7 +9,19 @@ const Song = require('../models/song')
 
 
 function getArtist(req, res){
-    res.status(200).send({message: 'Metodo getArtist del controlador artist'})
+    var artistId = req.params.id
+    Artist.findById(artistId, (err, artist) =>{
+        if(err){
+            res.status(500).send({message: 'Error al obtener artista'})
+        }else{
+            if(!artist){
+                res.status(404).send({message: 'Artista no encontrado'})
+            }else{
+                res.status(200).send({artist})
+            }
+        }
+    })
+    
 }
 
 function saveArtist(req, res) {
