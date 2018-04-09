@@ -11,7 +11,7 @@ var user_routes = require('./routes/user')
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 
-//configuracion de cabeceras htp
+//configuracion de cabeceras http
 
 //rutas base
 app.use('/api', user_routes)
