@@ -78,9 +78,44 @@ function updateArtist(req, res){
             res.status(500).send({message: 'error en la peticion'})
         }else{
             if(!artistUpdated){
-                res.status(500).send({message: 'no se encontró el artista'})
+                res.status(404).send({message: 'no se encontró el artista'})
             }else{
                 res.status(200).send({artist: artistUpdated})
+            }
+        }
+    })
+}
+
+function deleteArtist(req, res){
+    var artistId = req.params.id
+    Artist.findByIdAndRemove(artistId, (err, artistRemoved) => {
+        if(err){
+            res.status(500).send({message: 'error en la peticion'})
+        }else{
+            if(!artistRemoved){
+                res.status(404).send({message: 'no se encontró el artista'})
+            }else{
+                Album.find({artist: artistRemoved._id}).remove((err, albumRemoved) => {
+                    if(err){
+                        res.status(500).send({message: 'error en la peticion'})
+                    }else{
+                        if (!albumRemoved){
+                            res.status(404).send({message: 'no se encontró el album del artista'})
+                        }else{
+                            Song.find({album: albumRemoved._id}).remove((err, songRemoved) => {
+                                if (err){
+                                    res.status(500).send({message: 'error en la peticion'})
+                                }else{
+                                    if (!songRemoved){
+                                        res.status(404).send({message: 'no se encontró la canción'})
+                                    }else{
+                                        res.status(200).send({artist: artistRemoved})
+                                    }
+                                }
+                            })
+                        }
+                    }
+                })
             }
         }
     })
@@ -90,5 +125,6 @@ module.exports = {
     getArtist,
     saveArtist,
     getArtists,
-    updateArtist
+    updateArtist,
+    deleteArtist
 }
