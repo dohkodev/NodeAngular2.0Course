@@ -8,7 +8,6 @@ const Artist = require('../models/artist')
 const Album = require('../models/album')
 const Song = require('../models/song')
 
-
 function getArtist(req, res){
     var artistId = req.params.id
     Artist.findById(artistId, (err, artist) =>{
@@ -22,7 +21,6 @@ function getArtist(req, res){
             }
         }
     })
-    
 }
 
 function getArtists(req, res){
