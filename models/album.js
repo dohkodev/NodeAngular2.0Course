@@ -1,16 +1,14 @@
-import { Schema } from 'mongoose';
-
 'use strict'
 
 var mongoose = require('mongoose')
-var schema = mongoose.schema
+var Schema = mongoose.Schema
 
-var AlbumSchema = schema({
+var AlbumSchema = Schema({
     title: String,
     description: String,
     year: Number,
     image: String,
-    artist: {type: schema.ObjectId, ref: 'Artist'}
+    artist: {type: Schema.ObjectId, ref: 'Artist'}
 })
 
 module.exports = mongoose.model('Album', AlbumSchema)

@@ -1,14 +1,14 @@
 'use strict'
 
 var mongoose = require('mongoose')
-var schema = mongoose.schema
+var Schema = mongoose.Schema
 
-var SongSchema = schema({
+var SongSchema = Schema({
     number: String,
     name: String,
     duration: String,
     file: String,
-    album: {type: schema.ObjectId, ref: 'Album'}
+    album: {type: Schema.ObjectId, ref: 'Album'}
 })
 
 module.exports = mongoose.model('Song', SongSchema)

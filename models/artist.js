@@ -1,9 +1,9 @@
 'use strict'
 
 var mongoose = require('mongoose')
-var schema = mongoose.schema
+var Schema = mongoose.Schema
 
-var ArtistSchema = schema({
+var ArtistSchema = Schema({
     name: String,
     description: String,
     image: String
