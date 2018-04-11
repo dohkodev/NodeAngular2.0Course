@@ -20,7 +20,4 @@ app.use('/api', userRoutes)
 app.use('/api', artistRoutes)
 app.use('/api', albumRoutes)
 
-/* app.get('/prueba', function(req, res){
-    res.status(200).send({message:'hola mundo'})
-}) */
 module.exports = app
