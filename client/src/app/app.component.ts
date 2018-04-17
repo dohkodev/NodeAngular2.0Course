@@ -1,22 +1,76 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UserService } from './services/user.services'
 import { User } from './models/user';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
+  providers: [UserService]
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit{
   public title = 'MUSIFY';
   public user: User;
   public identity;
   public token;
+  public errorMessage
 
-  constructor(){
+  constructor(
+    private _userService: UserService
+  ){
     this.user = new User('','','','','','ROLE_USER', '');
+  }
+
+  ngOnInit(){
+    let texto = this._userService.singup
+    console.log(texto)
   }
 
   public onSubmit(){
     console.log(this.user)
+
+    //conseguir datos de usuario identificado
+    this._userService.singup(this.user).subscribe(
+      response => {
+        let identity = response.user
+        this.identity = identity
+        if(!this.identity._id){
+          alert('Usuario no esta correctamente identificado')
+        }else{
+          //crear elemento en el localStorage para tener al usuario en sesion
+
+          //conseguir token para enviarlo a cada peticion hhtp
+          this._userService.singup(this.user, true).subscribe(
+            response => {
+              let token = response.token
+              this.token = token
+              if(this.token.length <= 0){
+                alert('el token no se ha generado')
+              }else{
+                //crear elemento en el localStorage para tener el token disponible
+                console.log(token)
+                console.log(identity)                
+              }
+            },
+            error => {
+              let errorMessage = <any>error
+              if(errorMessage){
+                var _body = JSON.parse(error._body)
+                this.errorMessage = _body.message
+                console.log(error)
+              }
+            }
+          )
+        }
+      },
+      error => {
+        let errorMessage = <any>error
+        if(errorMessage){
+          var _body = JSON.parse(error._body)
+          this.errorMessage = _body.message
+          console.log(error)
+        }
+      }
+    )
   }
 }
