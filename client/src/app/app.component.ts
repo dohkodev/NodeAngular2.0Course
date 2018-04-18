@@ -22,8 +22,8 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(){
-    this.identity = this._userService.getIdentity
-    this.token = this._userService.getToken
+    this.identity = this._userService.getIdentity()
+    this.token = this._userService.getToken()
     console.log(this.identity)
     console.log(this.token)
   }
@@ -50,7 +50,9 @@ export class AppComponent implements OnInit{
                 alert('el token no se ha generado')
               }else{
                 //crear elemento en el localStorage para tener el token disponible
-                localStorage.setItem('token', token)          
+                localStorage.setItem('token', token)
+                console.log(token)
+                console.log(identity)      
               }
             },
             error => {
@@ -74,4 +76,13 @@ export class AppComponent implements OnInit{
       }
     )
   }
+
+  public logout(){
+    localStorage.removeItem('identity')
+    localStorage.removeItem('token')
+    localStorage.clear()
+    this.identity = null
+    this.token = null
+  }
+
 }

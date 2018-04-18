@@ -2,6 +2,8 @@
   <h1>
     {{title}}
   </h1>
+  <span>{{identity.name}} {{identity.lastname}}</span>
+  <span class="btn btn-primary" (click)="logout()" >Cerrar Sesión</span>
 </div>
 <div class="clearfix"></div>
 <div *ngIf="identity" class="central col-lg-11">

@@ -15,7 +15,7 @@ export class UserService {
         this.url = GLOBAL.url
     }
 
-    singup(user_to_login, gethash = null){
+    public singup(user_to_login, gethash = null){
         if(gethash){
             user_to_login.gethash = gethash
         }
@@ -27,10 +27,9 @@ export class UserService {
             .map(res => res.json())
     }
 
-    getIdentity(){
+    public getIdentity(){
         let identity = JSON.parse(localStorage.getItem('identity'))
-
-        if(identity){
+        if(identity != 'undefined'){
             this.identity = identity
         }else{
             this.identity = null
@@ -39,9 +38,9 @@ export class UserService {
         return this.identity
     }
 
-    getToken(){
+    public getToken(){
         let token = localStorage.getItem('token')
-        if(token){
+        if(token != 'undefined'){
             this.token = token
         }else{
             this.token = null
