@@ -8,9 +8,10 @@ import { User } from './models/user';
   providers: [UserService]
 })
 
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   public title = 'MUSIFY';
   public user: User;
+  public userRegister: User;
   public identity;
   public token;
   public errorMessage
@@ -18,7 +19,8 @@ export class AppComponent implements OnInit{
   constructor(
     private _userService: UserService
   ){
-    this.user = new User('','','','','','ROLE_USER', '');
+    this.user = new User('','','','','','ROLE_USER', '')
+    this.userRegister = new User('','','','','','ROLE_USER', '');
   }
 
   ngOnInit(){
@@ -83,6 +85,10 @@ export class AppComponent implements OnInit{
     localStorage.clear()
     this.identity = null
     this.token = null
+  }
+
+  public onSubmitRegister(){
+    console.log(this.userRegister)
   }
 
 }
