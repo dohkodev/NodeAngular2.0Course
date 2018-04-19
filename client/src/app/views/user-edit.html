@@ -1,4 +1,29 @@
 <div class="col-lg-6">
     <h1>{{titulo}}</h1>
     <!-- FORMULARIO -->
+    <div *ngIf="alertUpdate">
+        <div class="alert alert-warning">
+            {{alertUpdate}}
+        </div>
+    </div>
+    <form #userUpdateForm="ngForm" (ngSubmit)="onSubmit()" class="col-md-10">
+        <p>
+            <label for="">Nombre:</label>
+            <input type="text" #name="ngModel" name="name" [(ngModel)]="user.name" class="form-control" required>
+            <span *ngIf="!name.valid && name.touched"> El nombre es obligatorio!</span>
+        </p>
+        <p>
+            <label for="">Apellidos:</label>
+            <input type="text" #lastname="ngModel" name="lastname" [(ngModel)]="user.lastname" class="form-control" required>
+            <span *ngIf="!lastname.valid && lastname.touched"> El apellido es obligatorio!</span>
+        </p>
+        <p>
+            <label for="">Correo electrónico:</label>
+            <input type="email" #email="ngModel" name="email" [(ngModel)]="user.email" class="form-control" required>
+            <span *ngIf="!email.valid && email.touched"> El email es obligatorio!</span>
+        </p>
+
+        <input type="submit" class="btn btn-primary" value="Modificar">
+
+    </form>
 </div>

@@ -16,12 +16,12 @@
 <div class="clearfix"></div>
 <div *ngIf="identity" class="central col-lg-11">
   <p>Estas Logueado en la app</p>
-  <router-outlet></router-outlet>
+  <router-outlet></router-outlet><!-- ACA SE CARGAN LOS MUDULOS SETEADOS EN EL ROUTER -->
 </div>
 
 <div *ngIf="!identity" class="col-lg-12">
   <div class="col-lg-6">
-    <h1>Indentificate</h1>
+    <h1>Identifícate</h1>
     <div *ngIf="errorMessage">
       <div class="alert alert-warning">
         <strong>Error!</strong> {{errorMessage}}
@@ -41,7 +41,7 @@
     </form>
   </div>
   <div class="col-lg-6">
-    <h1>Registrate</h1>
+    <h1>Regístrate</h1>
     <div *ngIf="alertRegister">
       <div class="alert alert-warning">
         {{alertRegister}}
