@@ -1,9 +1,9 @@
 <div class="col-lg-6">
     <h1>{{titulo}}</h1>
     <!-- FORMULARIO -->
-    <div *ngIf="alertUpdate">
+    <div *ngIf="alertMessage">
         <div class="alert alert-warning">
-            {{alertUpdate}}
+            {{alertMessage}}
         </div>
     </div>
     <form #userUpdateForm="ngForm" (ngSubmit)="onSubmit()" class="col-md-10">
