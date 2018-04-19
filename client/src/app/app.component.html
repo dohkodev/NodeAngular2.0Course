@@ -10,13 +10,13 @@
   <nav id="userLogged">
     <span>{{identity.name}}</span>
     <span class="btn btn-warning" (click)="logout()" >Cerrar Sesión</span>
-    <a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Mis Datos</a>
+    <a [routerLink]="['/mis-datos']"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Mis Datos</a>
   </nav>
 </div>
 <div class="clearfix"></div>
 <div *ngIf="identity" class="central col-lg-11">
   <p>Estas Logueado en la app</p>
-  <user-edit></user-edit>
+  <router-outlet></router-outlet>
 </div>
 
 <div *ngIf="!identity" class="col-lg-12">
