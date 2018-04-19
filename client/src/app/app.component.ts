@@ -9,12 +9,13 @@ import { User } from './models/user';
 })
 
 export class AppComponent implements OnInit {
-  public title = 'MUSIFY';
-  public user: User;
-  public userRegister: User;
-  public identity;
-  public token;
+  public title = 'MUSIFY'
+  public user: User
+  public userRegister: User
+  public identity
+  public token
   public errorMessage
+  public alertRegister
 
   constructor(
     private _userService: UserService
@@ -89,6 +90,28 @@ export class AppComponent implements OnInit {
 
   public onSubmitRegister(){
     console.log(this.userRegister)
+
+    this._userService.register(this.userRegister).subscribe(
+      response => {
+        let user = response.user
+        this.userRegister = user
+
+        if (!user._id){
+          this.alertRegister = 'Error al registrarse'
+        }else{
+          this.alertRegister = 'El registro se ha realizado correctamente, identificate con '+this.userRegister.email
+          this.userRegister = new User('','','','','','ROLE_USER', '');
+        }
+      },
+      error => {
+        let errorMessage = <any>error
+          if(errorMessage){
+            var _body = JSON.parse(error._body)
+            this.alertRegister = _body.message
+            console.log(error)
+          }
+      }
+    )
   }
 
 }
