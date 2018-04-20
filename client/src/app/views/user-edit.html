@@ -24,7 +24,7 @@
         </p>
 
         <div class="imageForEdit" *ngIf="user.image && user.image != 'null'">
-            <img src="" alt="">
+            <img src="{{url + 'get-image-user/' + user.image}}" style="width: 50px">
         </div>
 
         <p>
