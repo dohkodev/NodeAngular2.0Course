@@ -23,6 +23,15 @@
             <span *ngIf="!email.valid && email.touched"> El email es obligatorio!</span>
         </p>
 
+        <div class="imageForEdit" *ngIf="user.image && user.image != 'null'">
+            <img src="" alt="">
+        </div>
+
+        <p>
+            <label for="">Sube tu Foto:</label>
+            <input type="file" placeholder="Subir imagen..." (change)="fileChangeEvent($event)" >
+        </p>
+
         <input type="submit" class="btn btn-primary" value="Modificar">
 
     </form>
