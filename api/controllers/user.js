@@ -29,7 +29,7 @@ function saveUser(req, res){
             if (user.name != null && user.lastname != null && user.email != null){
                 user.save((err, userStored) => {
                     if(err){
-                        res.status(500).send({message: 'ERROR: se produjo un error al guardar usuario'})
+                        res.status(500).send({message: 'ERROR: se produjo en la petición'})
                     }else{
                         if(!userStored){
                             res.status(404).send({message: 'ERROR: usuario no registrado'})
